@@ -6,6 +6,7 @@ $validator = new \Kenjis\Validation\Validator;
 
 $validator->add('a', 'required');
 $validator->add('a', 'maxlength', ['max' => 60]);
+$validator->remove('a', 'ValidUtf8');
 $validator->add('b', 'maxlength', ['max' => 60]);
 $validator->add('c', 'maxlength', ['max' => 60]);
 $validator->add('d', 'maxlength', ['max' => 60]);

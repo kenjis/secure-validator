@@ -10,11 +10,11 @@ Secure Validator is a library for data validation. It is based on [Sirius Valida
 
 ### Default Rules
 
-Secure Validator promotes strict validation. It provides default validtion rules.
+Secure Validator promotes strict validation. It sets default validtion rules to all fields.
 
- * checks if value is valid UTF-8 character encoding
- * checks if value is string
- * checks if value does not have control characters (except for tab and newline)
+ * `ValidUtf8` checks if value is valid UTF-8 character encoding
+ * `IsString` checks if value is string
+ * `NoControl` checks if value does not have control characters (except for tab and newline)
 
 And
 
@@ -27,3 +27,11 @@ If a field does not match the default rules, you can remove the rules.
 ### Validated Data
 
 You can get validated data only with `$validator->getValidated()`.
+
+## How to Use
+
+See [example.php](example.php) and [Sirius Validation Documentation](http://www.sirius.ro/php/sirius/validation/).
+
+### Tips
+
+When you set `required`, if a rule fails, Sirius Validation will not apply any more rules to that field.
