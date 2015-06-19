@@ -1,0 +1,26 @@
+{
+    "name": "kenjis/secure-validator",
+    "description": "Secure validation library.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "validation",
+        "security",
+        "validator"
+    ],
+    "authors": [
+        {
+            "name": "Kenji Suzuki",
+            "homepage": "https://github.com/kenjis/secure-validator"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "siriusphp/validation": "2.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kenjis\\Validation\\": "src/"
+        }
+    }
+}
