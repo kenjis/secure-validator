@@ -12,6 +12,7 @@ class Validator extends \Sirius\Validation\Validator
     {
         parent::__construct($ruleFactory, $errorMessagePrototype);
 
+        // register rules [Added by kenjis]
         $rulesClasses = array(
             'IsString',
             'NoControl',
