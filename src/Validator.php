@@ -2,9 +2,30 @@
 
 namespace Kenjis\Validation;
 
+use Sirius\Validation\RuleFactory;
+
 class Validator extends \Sirius\Validation\Validator
 {
     protected $validatedData = [];
+
+    public function __construct(RuleFactory $ruleFactory = null, ErrorMessage $errorMessagePrototype = null)
+    {
+        parent::__construct($ruleFactory, $errorMessagePrototype);
+
+        $rulesClasses = array(
+            'IsString',
+            'NoControl',
+            'NoTabAndNewLine',
+            'ValidUtf8',
+        );
+        foreach ($rulesClasses as $class) {
+            $fullClassName = '\\' . __NAMESPACE__ . '\Rule\\' . $class;
+            $name = strtolower(str_replace('\\', '', $class));
+            $errorMessage = constant($fullClassName . '::MESSAGE');
+            $labeledErrorMessage = constant($fullClassName . '::LABELED_MESSAGE');
+            $this->ruleFactory->register($name, $fullClassName, $errorMessage, $labeledErrorMessage);
+        }
+    }
 
     public function add($selector, $name = null, $options = null, $messageTemplate = null, $label = null)
     {

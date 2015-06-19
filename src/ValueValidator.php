@@ -24,9 +24,9 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         $this->rules = new RuleCollection;
         
         // add default rules [Added by kenjis]
-        $this->add('Kenjis\Validation\Rule\IsString');
-        $this->add('Kenjis\Validation\Rule\ValidUtf8');
-        $this->add('Kenjis\Validation\Rule\NoControl');
+        $this->add('IsString');
+        $this->add('ValidUtf8');
+        $this->add('NoControl');
         $this->add('maxlength', ['max' => 1]);
     }
 }
