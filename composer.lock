@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba937a42136f4ba03a1de46f6f085fce",
+    "hash": "1bb27063574cd3952ca2307e74129b02",
     "packages": [
         {
             "name": "siriusphp/validation",
