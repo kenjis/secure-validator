@@ -18,9 +18,9 @@ Secure Validator promotes strict validation. It sets default validtion rules to 
 
 And
 
- * adds max length 1 letter.
+ * adds `MaxLength` 1 letter.
 
-That is you have to set (override) max length rule to all fields. You don't forget it.
+That is you have to set (overwrite) max length rule to all fields. You don't forget it.
 
 If a field does not match the default rules, you can remove the rules.
 
