@@ -18,6 +18,7 @@ class Validator extends \Sirius\Validation\Validator
             'NoControl',
             'NoTabAndNewLine',
             'ValidUtf8',
+            'Url'   // overwrite
         );
         foreach ($rulesClasses as $class) {
             $fullClassName = '\\' . __NAMESPACE__ . '\Rule\\' . $class;
