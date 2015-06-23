@@ -52,9 +52,9 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
         $this->obj->add('b', 'required');
         $this->obj->add('c', 'required');
         $input = [
-            'a' => rawurldecode('%001234'), // null byte        -> fail
-            'b' => rawurldecode('%0a1234'), // linefeed         -> pass
-            'c' => rawurldecode('%181234'), // controll char    -> fail
+            'a' => rawurldecode('%001234'), // null byte     -> fail
+            'b' => rawurldecode('%0a1234'), // linefeed      -> pass
+            'c' => rawurldecode('%181234'), // controll char -> fail
         ];
         $this->assertFalse($this->obj->validate($input));
 
