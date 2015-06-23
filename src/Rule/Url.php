@@ -15,7 +15,8 @@ class Url extends AbstractRule
 
         if (empty($value)) {
             return false;
-        } if (preg_match('/\Ahttp(s?):/i', $value) !== 1) {
+        }
+        if (preg_match('/\Ahttp(s?):/i', $value) !== 1) {
             return false;
         }
 

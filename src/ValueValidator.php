@@ -8,7 +8,7 @@ use Sirius\Validation\RuleCollection;
 
 class ValueValidator extends \Sirius\Validation\ValueValidator
 {
-    function __construct(RuleFactory $ruleFactory = null, ErrorMessage $errorMessagePrototype = null, $label = null)
+    public function __construct(RuleFactory $ruleFactory = null, ErrorMessage $errorMessagePrototype = null, $label = null)
     {
         if (!$ruleFactory) {
             $ruleFactory = new RuleFactory();
@@ -69,7 +69,7 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
             }
             // rule was supplied like this 'length(2,10)(error message template)(label)'
             if (strpos($name, '(') !== false) {
-                list ($name, $options, $messageTemplate, $label) = $this->parseRule($name);
+                list($name, $options, $messageTemplate, $label) = $this->parseRule($name);
             }
         }
 
