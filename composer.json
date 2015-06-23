@@ -16,7 +16,8 @@
     ],
     "require": {
         "php": ">=5.4",
-        "siriusphp/validation": "2.0.*"
+        "siriusphp/validation": "2.0.*",
+        "siriusphp/filtration": "1.2.*"
     },
     "autoload": {
         "psr-4": {

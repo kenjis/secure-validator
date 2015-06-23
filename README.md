@@ -32,6 +32,14 @@ You can get validated data only with `$validator->getValidated()`.
 
 See [example.php](example.php) and [Sirius Validation Documentation](http://www.sirius.ro/php/sirius/validation/).
 
+### Added Method
+
+#### `Validator::filter()`
+
+Add filtering rule of Sirius\Filtration. See [Built-in filters](https://github.com/siriusphp/filtration/blob/master/docs/filters.md).
+
+Validator will apply filters before validation.
+
 ### Changed Rules
 
 `Url`: values must be a valid URL address (http, https only)

@@ -2,105 +2,103 @@
 
 namespace Kenjis\Validation;
 
-use Sirius\Validation\RuleFactory;
+use Sirius\Filtration\Filtrator;
 
-class Validator extends \Sirius\Validation\Validator
+class Validator
 {
-    protected $validatedData = [];
-
-    public function __construct(RuleFactory $ruleFactory = null, ErrorMessage $errorMessagePrototype = null)
+    private $validator;
+    private $filter;
+    
+    public function __construct()
     {
-        parent::__construct($ruleFactory, $errorMessagePrototype);
-
-        // register rules [Added by kenjis]
-        $rulesClasses = array(
-            'IsString',
-            'NoControl',
-            'NoTabAndNewLine',
-            'ValidUtf8',
-            'Url'   // overwrite
-        );
-        foreach ($rulesClasses as $class) {
-            $fullClassName = '\\' . __NAMESPACE__ . '\Rule\\' . $class;
-            $name = strtolower(str_replace('\\', '', $class));
-            $errorMessage = constant($fullClassName . '::MESSAGE');
-            $labeledErrorMessage = constant($fullClassName . '::LABELED_MESSAGE');
-            $this->ruleFactory->register($name, $fullClassName, $errorMessage, $labeledErrorMessage);
-        }
+        $this->validator = new ValidatorEx();
+        $this->filter    = new Filtrator();
     }
 
+    /**
+     * Add validation rule
+     * 
+     * @param type $selector
+     * @param type $name
+     * @param type $options
+     * @param type $messageTemplate
+     * @param type $label
+     * @return \Kenjis\Validation\Validator
+     */
     public function add($selector, $name = null, $options = null, $messageTemplate = null, $label = null)
     {
-        // the $selector is an associative array with $selector => $rules
-        if (func_num_args() == 1) {
-            if (!is_array($selector)) {
-                throw new \InvalidArgumentException('If $selector is the only argument it must be an array');
-            }
-
-            return $this->addMultiple($selector);
-        }
-
-        // check if the selector is in the form of 'selector:Label'
-        if (strpos($selector, ':') !== false) {
-            list($selector, $label) = explode(':', $selector, 2);
-        }
-
-        $this->ensureSelectorRulesExist($selector);
+        $this->validator->add(
+            $selector, $name, $options, $messageTemplate, $label
+        );
         
-        // remove existing rule [Added by kenjis]
-        call_user_func(array($this->rules[$selector], 'remove'), $name, $options);
-        
-        call_user_func(array($this->rules[$selector], 'add'), $name, $options, $messageTemplate, $label);
-
         return $this;
     }
 
+    /**
+     * Remove validation rule
+     * 
+     * @param type $selector
+     * @param boolean $name
+     * @param type $options
+     * @return \Kenjis\Validation\Validator
+     */
+    public function remove($selector, $name = true, $options = null)
+    {
+        $this->validator->remove($selector, $name, $options);
+        
+        return $this;
+    }
+
+    /**
+     * Add filtering rule
+     * 
+     * @param string $selector            data selector
+     * @param mixed $callbackOrFilterName rule name or true if all rules should be deleted for that selector
+     * @param mixed $options              rule options, necessary for rules that depend on params for their ID
+     * @param bool $recursive             
+     * @param int $priority               
+     * @return \Kenjis\Validation\Validator
+     */
+    public function filter($selector, $callbackOrFilterName = null, $options = null, $recursive = false, $priority = 0)
+    {
+        $this->filter->add(
+            $selector, $callbackOrFilterName, $options, $recursive, $priority
+        );
+        
+        return $this;
+    }
+
+    /**
+     * Validate data
+     * 
+     * @param mixed $data array to be validated
+     * @return bool
+     */
     public function validate($data = null)
     {
-        if ($data !== null) {
-            $this->setData($data);
-        }
-        // data was already validated, return the results immediately
-        if ($this->wasValidated === true) {
-            return $this->wasValidated && count($this->messages) === 0;
-        }
-        foreach ($this->rules as $selector => $valueValidator) {
-            foreach ($this->getDataWrapper()->getItemsBySelector($selector) as $valueIdentifier => $value) {
-                /* @var $valueValidator \Sirius\Validation\ValueValidator */
-                if (!$valueValidator->validate($value, $valueIdentifier, $this->getDataWrapper())) {
-                    foreach ($valueValidator->getMessages() as $message) {
-                        $this->addMessage($valueIdentifier, $message);
-                    }
-                } else {
-                    // handle array
-                    if (preg_match('/(.+)\[(.+)\]\[(.+)\]/i', $valueIdentifier, $matches)) {
-                        $name = $matches[1];
-                        $key1 = $matches[2];
-                        $key2 = $matches[3];
-                        $this->validatedData[$name][$key1][$key2] = $value;
-                    } else {
-                        $this->validatedData[$valueIdentifier] = $value;
-                    }
-                }
-            }
-        }
-        $this->wasValidated = true;
-
-        return $this->wasValidated && count($this->messages) === 0;
+        $filtered = $this->filter->filter($data);
+        return $this->validator->validate($filtered);
     }
 
-    protected function ensureSelectorRulesExist($selector)
-    {
-        if (!isset($this->rules[$selector])) {
-            $this->rules[$selector] = new ValueValidator($this->getRuleFactory(), $this->getErroMessagePrototype());
-        }
-    }
-
+    /**
+     * Get validated data
+     * 
+     * @param string $item
+     * @return string|array
+     */
     public function getValidated($item = null)
     {
-        if ($item) {
-            return isset($this->validatedData[$item]) ? $this->validatedData[$item] : null;
-        }
-        return $this->validatedData;
+        return $this->validator->getValidated($item);
+    }
+
+    /**
+     * Get messages
+     * 
+     * @param type $item
+     * @return array
+     */
+    public function getMessages($item = null)
+    {
+        return $this->validator->getMessages($item);
     }
 }
