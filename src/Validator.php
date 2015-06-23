@@ -72,7 +72,15 @@ class Validator extends \Sirius\Validation\Validator
                         $this->addMessage($valueIdentifier, $message);
                     }
                 } else {
-                    $this->validatedData[$valueIdentifier] = $value;
+                    // handle array
+                    if (preg_match('/(.+)\[(.+)\]\[(.+)\]/i', $valueIdentifier, $matches)) {
+                        $name = $matches[1];
+                        $key1 = $matches[2];
+                        $key2 = $matches[3];
+                        $this->validatedData[$name][$key1][$key2] = $value;
+                    } else {
+                        $this->validatedData[$valueIdentifier] = $value;
+                    }
                 }
             }
         }
@@ -88,8 +96,11 @@ class Validator extends \Sirius\Validation\Validator
         }
     }
 
-    public function getValidated()
+    public function getValidated($item = null)
     {
+        if ($item) {
+            return isset($this->validatedData[$item]) ? $this->validatedData[$item] : null;
+        }
         return $this->validatedData;
     }
 }
