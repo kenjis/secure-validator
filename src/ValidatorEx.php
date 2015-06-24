@@ -66,6 +66,13 @@ class ValidatorEx extends \Sirius\Validation\Validator
             return count($this->messages) === 0;
         }
 
+        $this->validateValue();
+
+        return count($this->messages) === 0;
+    }
+
+    protected function validateValue()
+    {
         foreach ($this->rules as $selector => $valueValidator) {
             foreach ($this->getDataWrapper()->getItemsBySelector($selector) as $valueIdentifier => $value) {
                 /* @var $valueValidator \Kenjis\Validation\ValueValidator */
@@ -77,8 +84,6 @@ class ValidatorEx extends \Sirius\Validation\Validator
             }
         }
         $this->wasValidated = true;
-
-        return count($this->messages) === 0;
     }
 
     protected function addErrorMessages($valueValidator, $valueIdentifier)
