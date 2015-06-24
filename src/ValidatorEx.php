@@ -29,17 +29,36 @@ class ValidatorEx extends \Sirius\Validation\Validator
         }
     }
 
+    /**
+     * Add Rules
+     * 
+     * @param string|array $selector
+     * @param string|callable $name
+     * @param string|array $options
+     * @param string $messageTemplate
+     * @param string $label
+     * 
+     * @return \Kenjis\Validation\ValidatorEx
+     * @throws \InvalidArgumentException
+     */
     public function add($selector, $name = null, $options = null, $messageTemplate = null, $label = null)
     {
         // the $selector is an associative array with $selector => $rules
         if (func_num_args() == 1) {
             if (!is_array($selector)) {
-                throw new \InvalidArgumentException('If $selector is the only argument it must be an array');
+                throw new \InvalidArgumentException(
+                    'If $selector is the only argument it must be an array'
+                );
             }
 
             return $this->addMultiple($selector);
         }
 
+        return $this->addRule($selector, $name, $options, $messageTemplate, $label);
+    }
+
+    protected function addRule($selector, $name, $options, $messageTemplate, $label)
+    {
         // check if the selector is in the form of 'selector:Label'
         if (strpos($selector, ':') !== false) {
             list($selector, $label) = explode(':', $selector, 2);
