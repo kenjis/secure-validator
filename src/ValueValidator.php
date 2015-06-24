@@ -64,7 +64,6 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
     {
         if ($name === true) {
             $this->rules = new RuleCollection();
-
             return $this;
         }
 
@@ -72,6 +71,7 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         if (is_array($name) && !is_callable($name)) {
             return $this->removeMultiple($name);
         }
+
         if (is_string($name)) {
             // rule was supplied like 'required | email'
             if (strpos($name, ' | ') !== false) {
@@ -79,7 +79,7 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
             }
             // rule was supplied like this 'length(2,10)(error message template)(label)'
             if (strpos($name, '(') !== false) {
-                list($name, $options, $messageTemplate, $label) = $this->parseRule($name);
+                list($name, $options,,) = $this->parseRule($name);
             }
         }
 
