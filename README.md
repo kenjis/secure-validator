@@ -42,7 +42,7 @@ Validator will apply filters before validation.
 
 #### `Validator::getInputValue()`
 
-Get raw input value of specific field.
+Get input value after filtering of specific field.
 
 ### Changed Rules
 
