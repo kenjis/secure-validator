@@ -32,6 +32,17 @@ You can get validated data only with `$validator->getValidated()`.
 
 See [example.php](example.php) and [Sirius Validation Documentation](http://www.sirius.ro/php/sirius/validation/).
 
+~~~php
+$validator = new \Kenjis\Validation\Validator;
+$validator->add('field', 'required');
+$validator->add('field', 'maxlength', ['max' => 60]);
+if ($validator->validate($_POST)) {
+    // validation passed
+} else {
+    // validation failed
+}
+~~~
+
 ### Added Method
 
 #### `Validator::filter()`
@@ -40,9 +51,27 @@ Add filtering rule of Sirius\Filtration. See [Built-in filters](https://github.c
 
 Validator will apply filters before validation.
 
+~~~php
+$validator->filter('field', 'StringTrim');
+~~~
+
+#### `Validator::getValidated()`
+
+Get validated values.
+
+~~~php
+$allData = $validator->getValidated();
+
+$field = $validator->getValidated('field');
+~~~
+
 #### `Validator::getInputValue()`
 
 Get input value after filtering of specific field.
+
+~~~php
+$field = $validator->getInputValue('field');
+~~~
 
 ### Changed Rules
 
