@@ -24,6 +24,15 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         $this->add('maxlength', ['max' => 1]);
     }
 
+    public function add($name, $options = null, $messageTemplate = null, $label = null)
+    {
+        if ($label !== null && $this->label === null) {
+            $this->label = $label;
+        }
+
+        return parent::add($name, $options, $messageTemplate, $label);
+    }
+
     /**
      * Added by kenjis
      */
