@@ -72,18 +72,33 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
             return $this->removeMultiple($name);
         }
 
+        if (is_string($name)) {
+            return $this->removeByString($name, $options);
+        }
+
+        $this->removeRule($name, $options);
+        return $this;
+    }
+
+    protected function removeByString($name, $options)
+    {
         // rule was supplied like 'required | email'
-        if (is_string($name) && strpos($name, ' | ') !== false) {
+        if (strpos($name, ' | ') !== false) {
             return $this->remove(explode(' | ', $name));
         }
+
         // rule was supplied like this 'length(2,10)(error message template)(label)'
-        if (is_string($name) && strpos($name, '(') !== false) {
+        if (strpos($name, '(') !== false) {
             list($name, $options,,) = $this->parseRule($name);
         }
 
+        $this->removeRule($name, $options);
+        return $this;
+    }
+
+    protected function removeRule($name, $options)
+    {
         $validator = $this->ruleFactory->createRule($name, $options);
         $this->rules->detach($validator);
-
-        return $this;
     }
 }
