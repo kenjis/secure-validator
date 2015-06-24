@@ -10,13 +10,7 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
 {
     public function __construct(RuleFactory $ruleFactory = null, ErrorMessage $errorMessagePrototype = null, $label = null)
     {
-        if (!$ruleFactory) {
-            $ruleFactory = new RuleFactory();
-        }
         $this->ruleFactory = $ruleFactory;
-        if (!$errorMessagePrototype) {
-            $errorMessagePrototype = new ErrorMessage();
-        }
         $this->errorMessagePrototype = $errorMessagePrototype;
         if ($label) {
             $this->label = $label;

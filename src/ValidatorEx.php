@@ -72,21 +72,26 @@ class ValidatorEx extends \Sirius\Validation\Validator
                         $this->addMessage($valueIdentifier, $message);
                     }
                 } else {
-                    // handle array
-                    if (preg_match('/(.+)\[(.+)\]\[(.+)\]/i', $valueIdentifier, $matches)) {
-                        $name = $matches[1];
-                        $key1 = $matches[2];
-                        $key2 = $matches[3];
-                        $this->validatedData[$name][$key1][$key2] = $value;
-                    } else {
-                        $this->validatedData[$valueIdentifier] = $value;
-                    }
+                    $this->setValidatedData($valueIdentifier, $value);
                 }
             }
         }
         $this->wasValidated = true;
 
         return $this->wasValidated && count($this->messages) === 0;
+    }
+
+    protected function setValidatedData($valueIdentifier, $value)
+    {
+        // handle array
+        if (preg_match('/(.+)\[(.+)\]\[(.+)\]/i', $valueIdentifier, $matches)) {
+            $name = $matches[1];
+            $key1 = $matches[2];
+            $key2 = $matches[3];
+            $this->validatedData[$name][$key1][$key2] = $value;
+        } else {
+            $this->validatedData[$valueIdentifier] = $value;
+        }
     }
 
     protected function ensureSelectorRulesExist($selector)
