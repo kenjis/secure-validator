@@ -63,7 +63,7 @@ class ValidatorEx extends \Sirius\Validation\Validator
 
         // data was already validated, return the results immediately
         if ($this->wasValidated === true) {
-            return $this->wasValidated && count($this->messages) === 0;
+            return count($this->messages) === 0;
         }
 
         foreach ($this->rules as $selector => $valueValidator) {
@@ -78,7 +78,7 @@ class ValidatorEx extends \Sirius\Validation\Validator
         }
         $this->wasValidated = true;
 
-        return $this->wasValidated && count($this->messages) === 0;
+        return count($this->messages) === 0;
     }
 
     protected function addErrorMessages($valueValidator, $valueIdentifier)
