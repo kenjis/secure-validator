@@ -60,17 +60,17 @@ class ValidatorEx extends \Sirius\Validation\Validator
         if ($data !== null) {
             $this->setData($data);
         }
+
         // data was already validated, return the results immediately
         if ($this->wasValidated === true) {
             return $this->wasValidated && count($this->messages) === 0;
         }
+
         foreach ($this->rules as $selector => $valueValidator) {
             foreach ($this->getDataWrapper()->getItemsBySelector($selector) as $valueIdentifier => $value) {
-                /* @var $valueValidator \Sirius\Validation\ValueValidator */
+                /* @var $valueValidator \Kenjis\Validation\ValueValidator */
                 if (!$valueValidator->validate($value, $valueIdentifier, $this->getDataWrapper())) {
-                    foreach ($valueValidator->getMessages() as $message) {
-                        $this->addMessage($valueIdentifier, $message);
-                    }
+                    $this->addErrorMessages($valueValidator, $valueIdentifier);
                 } else {
                     $this->setValidatedData($valueIdentifier, $value);
                 }
@@ -79,6 +79,13 @@ class ValidatorEx extends \Sirius\Validation\Validator
         $this->wasValidated = true;
 
         return $this->wasValidated && count($this->messages) === 0;
+    }
+
+    protected function addErrorMessages($valueValidator, $valueIdentifier)
+    {
+        foreach ($valueValidator->getMessages() as $message) {
+            $this->addMessage($valueIdentifier, $message);
+        }
     }
 
     protected function setValidatedData($valueIdentifier, $value)
