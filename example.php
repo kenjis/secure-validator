@@ -12,6 +12,8 @@ $validator->add('c', 'maxlength', ['max' => 60]);
 $validator->add('d', 'maxlength', ['max' => 60]);
 $validator->add('e', 'maxlength', ['max' => 60]);
 $validator->add('f', 'maxlength', ['max' => 60]);
+$validator->add('g', 'maxlength', ['max' => 60]);
+$validator->filter('g', 'StringTrim');
 
 $_POST = [
     'a' => [
@@ -22,6 +24,7 @@ $_POST = [
     'c' => rawurldecode('%0a1234'), // linefeed
     'd' => rawurldecode('%181234'), // controll char
     'f' => rawurldecode('%E6%97%A5%E6%0C%AC%E8%AA%9E%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A'),    // invalid char encoding
+    'g' => ' abc def  ',
 ];
 
 if ($validator->validate($_POST)) {
@@ -33,4 +36,6 @@ if ($validator->validate($_POST)) {
             echo $key . ': ' . $error, PHP_EOL;
         }
     }
+    
+    var_dump($validator->getInputValue('g'));
 }
