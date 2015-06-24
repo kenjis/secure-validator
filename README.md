@@ -40,6 +40,10 @@ Add filtering rule of Sirius\Filtration. See [Built-in filters](https://github.c
 
 Validator will apply filters before validation.
 
+#### `Validator::getInputValue()`
+
+Get raw input value of specific field.
+
 ### Changed Rules
 
 `Url`: values must be a valid URL address (http, https only)

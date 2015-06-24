@@ -27,6 +27,11 @@ class Validator
      */
     public function add($selector, $name = null, $options = null, $messageTemplate = null, $label = null)
     {
+        if (func_num_args() == 1) {
+            $this->validator->add($selector);
+            return $this;
+        }
+
         $this->validator->add(
             $selector, $name, $options, $messageTemplate, $label
         );
@@ -100,5 +105,10 @@ class Validator
     public function getMessages($item = null)
     {
         return $this->validator->getMessages($item);
+    }
+
+    public function getInputValue($item)
+    {
+        return $this->validator->getInputValue($item);
     }
 }

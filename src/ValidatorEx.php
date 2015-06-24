@@ -103,4 +103,9 @@ class ValidatorEx extends \Sirius\Validation\Validator
         }
         return $this->validatedData;
     }
+
+    public function getInputValue($item)
+    {
+        return $this->getDataWrapper()->getItemValue($item);
+    }
 }
