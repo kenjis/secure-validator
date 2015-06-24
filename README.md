@@ -38,8 +38,7 @@ See [example.php](example.php) and [Sirius Validation Documentation](http://www.
 
 ~~~php
 $validator = new \Kenjis\Validation\Validator;
-$validator->add('field', 'required');
-$validator->add('field', 'maxlength', ['max' => 60]);
+$validator->add('field', 'required | maxlength(max=60)');
 if ($validator->validate($_POST)) {
     // validation passed
 } else {
