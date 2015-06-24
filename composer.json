@@ -1,6 +1,6 @@
 {
     "name": "kenjis/secure-validator",
-    "description": "Secure validation library.",
+    "description": "Secure input validation library.",
     "type": "library",
     "license": "MIT",
     "keywords": [

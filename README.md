@@ -1,6 +1,6 @@
 # Secure Validator
 
-Secure Validator is a library for data validation. It is based on [Sirius Validation](https://github.com/siriusphp/validation).
+Secure Validator is a library for input validation. It is based on [Sirius Validation](https://github.com/siriusphp/validation).
 
 ## Requirements
 
