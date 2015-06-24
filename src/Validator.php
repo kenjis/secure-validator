@@ -18,11 +18,11 @@ class Validator
     /**
      * Add validation rule
      * 
-     * @param type $selector
-     * @param type $name
-     * @param type $options
-     * @param type $messageTemplate
-     * @param type $label
+     * @param string|array $selector
+     * @param string|callback $name
+     * @param string|array $options
+     * @param string $messageTemplate
+     * @param string $label
      * @return \Kenjis\Validation\Validator
      */
     public function add($selector, $name = null, $options = null, $messageTemplate = null, $label = null)
@@ -42,9 +42,9 @@ class Validator
     /**
      * Remove validation rule
      * 
-     * @param type $selector
-     * @param boolean $name
-     * @param type $options
+     * @param string $selector data selector
+     * @param mixed $name      rule name or true if all rules should be deleted for that selector
+     * @param mixed $options   rule options, necessary for rules that depend on params for their ID
      * @return \Kenjis\Validation\Validator
      */
     public function remove($selector, $name = true, $options = null)
