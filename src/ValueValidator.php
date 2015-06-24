@@ -8,7 +8,7 @@ use Sirius\Validation\RuleCollection;
 
 class ValueValidator extends \Sirius\Validation\ValueValidator
 {
-    public function __construct(RuleFactory $ruleFactory = null, ErrorMessage $errorMessagePrototype = null, $label = null)
+    public function __construct(RuleFactory $ruleFactory, ErrorMessage $errorMessagePrototype, $label = null)
     {
         $this->ruleFactory = $ruleFactory;
         $this->errorMessagePrototype = $errorMessagePrototype;
