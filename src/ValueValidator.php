@@ -50,6 +50,13 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         }
     }
 
+    /**
+     * Remove rule
+     * 
+     * @param mixed $name    rule name or true if all rules should be deleted for that selector
+     * @param mixed $options rule options, necessary for rules that depend on params for their ID
+     * @return \Kenjis\Validation\ValueValidator
+     */
     public function remove($name = true, $options = null)
     {
         if ($name === true) {
