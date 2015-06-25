@@ -67,6 +67,53 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function test_getValidated()
+    {
+        $this->obj->add('string', 'maxlength(max=60)');
+        $this->obj->add('array', 'required');
+        $this->obj->remove('array', 'isString');
+        $this->obj->remove('array', 'MaxLength');
+        $this->obj->add('array2', 'required');
+        $this->obj->remove('array2', 'isString');
+        $this->obj->remove('array2', 'MaxLength');
+        $this->obj->add('array3', 'required');
+        $this->obj->remove('array3', 'isString');
+        $this->obj->remove('array3', 'MaxLength');
+        $this->obj->add('array4', 'required');
+        $this->obj->remove('array4', 'isString');
+        $this->obj->remove('array4', 'MaxLength');
+
+        $input = [
+            'string' => 'abc',
+            'array' => ['1', '2'],
+            'array2' => ['key1' => 'val1', 'key2' => 'val2'],
+            'array3' => [['abc'], ['xyz']],
+            'array4' => ['a' => ['b' => ['c' => 'abc', 'd' => 'xyz']]],
+        ];
+        $this->assertTrue($this->obj->validate($input));
+
+        $this->assertEquals(
+            'abc',
+            $this->obj->getValidated('string')
+        );
+        $this->assertEquals(
+            ['1', '2'],
+            $this->obj->getValidated('array')
+        );
+        $this->assertEquals(
+            ['key1' => 'val1', 'key2' => 'val2'],
+            $this->obj->getValidated('array2')
+        );
+        $this->assertEquals(
+            [['abc'], ['xyz']],
+            $this->obj->getValidated('array3')
+        );
+        $this->assertEquals(
+            ['a' => ['b' => ['c' => 'abc', 'd' => 'xyz']]],
+            $this->obj->getValidated('array4')
+        );
+    }
+
     public function test_add_array()
     {
         $this->obj->add([
