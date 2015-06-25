@@ -19,5 +19,7 @@ before_script:
 script:
   - phpunit --coverage-text
 
-after_success:
-  - php vendor/bin/coveralls -v
+after_script:
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.4' ]; then php vendor/bin/coveralls -v
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.5' ]; then php vendor/bin/coveralls -v
+  - sh -c "if [ '$TRAVIS_PHP_VERSION' = '5.6' ]; then php vendor/bin/coveralls -v
