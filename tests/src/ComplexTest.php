@@ -23,7 +23,7 @@ class ComplexTest extends \PHPUnit_Framework_TestCase
             ->remove('lines[*][quantity]', 'isString');
     }
 
-    function testtWithCorrectData()
+    function testWithCorrectData()
     {
         $data = array(
             'email'                     => 'me@domain.com',
