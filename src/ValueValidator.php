@@ -65,13 +65,15 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         if ($name === true) {
             $this->rules = new RuleCollection();
             return $this;
-        } elseif (is_callable($name)) {
+        }
+
+        if (is_callable($name)) {
             return $this->removeRule($name, $options);
         } elseif (is_array($name)) {
             return $this->removeMultiple($name);
-        } elseif (is_string($name)) {
-            return $this->removeByString($name, $options);
         }
+
+        return $this->removeByString($name, $options);
     }
 
     protected function removeByString($name, $options)
