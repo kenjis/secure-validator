@@ -105,4 +105,33 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         ];
         $this->assertTrue($this->obj->validate($input));
     }
+
+    public function test_add_callable()
+    {
+        $this->obj->add('field', 'Kenjis\Validation\FakeValidationRule::isTrue', null, 'Field must be string');
+        $input = [
+            'field' => 'a',
+        ];
+        $this->assertTrue($this->obj->validate($input));
+    }
+
+    public function test_validate_twice()
+    {
+        $this->obj->add('field', 'required');
+        $this->obj->add('field', 'maxlength', ['max' => 60]);
+        $input = [
+            'field' => 'abc',
+        ];
+        $this->assertTrue($this->obj->validate($input));
+        $this->assertTrue($this->obj->validate());
+    }
+}
+
+
+class FakeValidationRule
+{
+    public static function isTrue($value, $field, $dataWrapper)
+    {
+        return true;
+    }
 }
