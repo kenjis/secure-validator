@@ -1,5 +1,7 @@
 # Secure Validator
 
+[![Latest Stable Version](https://poser.pugx.org/kenjis/secure-validator/v/stable)](https://packagist.org/packages/kenjis/secure-validator) [![Total Downloads](https://poser.pugx.org/kenjis/secure-validator/downloads)](https://packagist.org/packages/kenjis/secure-validator) [![Latest Unstable Version](https://poser.pugx.org/kenjis/secure-validator/v/unstable)](https://packagist.org/packages/kenjis/secure-validator) [![License](https://poser.pugx.org/kenjis/secure-validator/license)](https://packagist.org/packages/kenjis/secure-validator)
+
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kenjis/secure-validator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kenjis/secure-validator/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/kenjis/secure-validator/badge.svg?branch=master)](https://coveralls.io/r/kenjis/secure-validator?branch=master)
 [![Build Status](https://travis-ci.org/kenjis/secure-validator.svg?branch=master)](https://travis-ci.org/kenjis/secure-validator)
