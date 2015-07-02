@@ -64,7 +64,7 @@ class ValidatorEx extends \Sirius\Validation\Validator
             list($selector, $label) = explode(':', $selector, 2);
         }
 
-        $this->ensureSelectorRulesExist($selector);
+        $this->ensureSelectorRulesExist($selector, $label);
         
         // remove existing rule [Added by kenjis]
         call_user_func(array($this->rules[$selector], 'remove'), $name, $options);
@@ -125,10 +125,10 @@ class ValidatorEx extends \Sirius\Validation\Validator
         }
     }
 
-    protected function ensureSelectorRulesExist($selector)
+    protected function ensureSelectorRulesExist($selector, $label = NULL)
     {
         if (!isset($this->rules[$selector])) {
-            $this->rules[$selector] = new ValueValidator($this->getRuleFactory(), $this->getErroMessagePrototype());
+            $this->rules[$selector] = new ValueValidator($this->getRuleFactory(), $this->getErroMessagePrototype(), $label);
         }
     }
 

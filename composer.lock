@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "778c5cbd528b82d6fba0464045868c6c",
+    "hash": "2481422bc6718c5fee0ecb0d788c1666",
     "packages": [
         {
             "name": "siriusphp/filtration",
@@ -53,16 +53,16 @@
         },
         {
             "name": "siriusphp/validation",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/siriusphp/validation.git",
-                "reference": "f7308fd7249442594145e80b55a8f8ccb8d16ebd"
+                "reference": "4851664dcfb3ecbd4f1e01bf3f42fc0d3dd5b2bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/siriusphp/validation/zipball/f7308fd7249442594145e80b55a8f8ccb8d16ebd",
-                "reference": "f7308fd7249442594145e80b55a8f8ccb8d16ebd",
+                "url": "https://api.github.com/repos/siriusphp/validation/zipball/4851664dcfb3ecbd4f1e01bf3f42fc0d3dd5b2bc",
+                "reference": "4851664dcfb3ecbd4f1e01bf3f42fc0d3dd5b2bc",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +96,7 @@
                 "security",
                 "validation"
             ],
-            "time": "2015-05-17 07:11:18"
+            "time": "2015-06-26 06:21:17"
         }
     ],
     "packages-dev": [
