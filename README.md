@@ -30,6 +30,12 @@ That is you have to set (overwrite) max length rule to all fields. You don't for
 
 If a field does not match the default rules, you can remove the rules.
 
+### Fatal Rules
+
+You can set a validation rule as *fatal* to detect abnormal input like an attack.
+
+If a fatal rule fails, exception `FatalValidationError` will be thrown immediately.
+
 ### Validated Data
 
 You can get validated data only with `$validator->getValidated()`.

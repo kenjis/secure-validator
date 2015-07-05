@@ -53,4 +53,10 @@ class ValueValidatorTest extends \PHPUnit_Framework_TestCase
             (string)$this->obj->getMessages()[0]
         );
     }
+
+    public function test_not_required_and_value_is_null()
+    {
+        $this->obj->remove('MaxLength');
+        $this->assertTrue($this->obj->validate(null));
+    }
 }

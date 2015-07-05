@@ -7,11 +7,18 @@ $validator = new \Kenjis\Validation\Validator;
 $validator->add('a', 'required');
 $validator->add('a', 'maxlength', ['max' => 60]);
 $validator->remove('a', 'ValidUtf8');
-$validator->add('b', 'maxlength', ['max' => 60]);
+
+// rule maxlength 60 is fatal
+$validator->add('b', 'maxlength', ['max' => 60, 'fatal' => true]);
+
 $validator->add('c', 'maxlength', ['max' => 60]);
+
 $validator->add('d', 'maxlength', ['max' => 60]);
+
 $validator->add('e', 'maxlength', ['max' => 60]);
+
 $validator->add('f', 'maxlength', ['max' => 60]);
+
 $validator->add('g', 'maxlength', ['max' => 60]);
 $validator->filter('g', 'StringTrim');
 

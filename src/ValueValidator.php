@@ -5,6 +5,8 @@ namespace Kenjis\Validation;
 use Sirius\Validation\RuleFactory;
 use Sirius\Validation\ErrorMessage;
 use Sirius\Validation\RuleCollection;
+use Sirius\Validation\DataWrapper\WrapperInterface;
+use Sirius\Validation\Rule\Required;
 
 class ValueValidator extends \Sirius\Validation\ValueValidator
 {
@@ -87,5 +89,43 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
     {
         $validator = $this->ruleFactory->createRule($name, $options);
         $this->rules->detach($validator);
+    }
+
+    public function validate($value, $valueIdentifier = null, WrapperInterface $context = null)
+    {
+        $this->messages = array();
+        $isRequired = false;
+        foreach ($this->rules as $rule) {
+            if ($rule instanceof Required) {
+                $isRequired = true;
+                break;
+            }
+        }
+
+        if (!$isRequired && $value === null) {
+            return true;
+        }
+
+        /* @var $rule \Sirius\Validation\Rule\AbstractValidator */
+        foreach ($this->rules as $rule) {
+            $rule->setContext($context);
+            if (!$rule->validate($value, $valueIdentifier)) {
+                // if fatal rule fails
+                if ($rule->getOption('fatal')) {
+                    $exception = new FatalValidationError($rule->getMessage());
+                    $exception->setRule($rule, $value, $valueIdentifier);
+                    throw $exception;
+                }
+                
+                $this->addMessage($rule->getMessage());
+            }
+            // if field is required and we have an error,
+            // do not continue with the rest of rules
+            if ($isRequired && count($this->messages)) {
+                break;
+            }
+        }
+
+        return count($this->messages) === 0;
     }
 }

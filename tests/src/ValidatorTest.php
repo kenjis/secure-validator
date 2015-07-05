@@ -39,6 +39,19 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException Kenjis\Validation\FatalValidationError
+     */
+    public function test_fatal_rule()
+    {
+        $this->obj->add('field', 'required');
+        $this->obj->add('field', 'maxlength', ['max' => 3, 'fatal' => true]);
+        $input = [
+            'field' => '12345',
+        ];
+        $this->obj->validate($input);
+    }
+
     public function test_getInputValue_fail()
     {
         $this->obj->add('field', 'required');
