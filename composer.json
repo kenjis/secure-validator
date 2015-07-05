@@ -14,9 +14,15 @@
             "homepage": "https://github.com/kenjis/secure-validator"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/kenjis/siriusphp-validation.git"
+        }
+    ],
     "require": {
         "php": ">=5.4",
-        "siriusphp/validation": "2.1.*",
+        "siriusphp/validation": "dev-add-getOption",
         "siriusphp/filtration": "1.2.*"
     },
     "require-dev": {

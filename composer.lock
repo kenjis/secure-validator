@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2481422bc6718c5fee0ecb0d788c1666",
+    "hash": "c92c9e42f626e1fd3a3978ee99b1abdd",
     "packages": [
         {
             "name": "siriusphp/filtration",
@@ -53,16 +53,16 @@
         },
         {
             "name": "siriusphp/validation",
-            "version": "2.1.0",
+            "version": "dev-add-getOption",
             "source": {
                 "type": "git",
-                "url": "https://github.com/siriusphp/validation.git",
-                "reference": "4851664dcfb3ecbd4f1e01bf3f42fc0d3dd5b2bc"
+                "url": "https://github.com/kenjis/siriusphp-validation.git",
+                "reference": "cbea1a01536a06a67b9d1838fac11d3dece03bb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/siriusphp/validation/zipball/4851664dcfb3ecbd4f1e01bf3f42fc0d3dd5b2bc",
-                "reference": "4851664dcfb3ecbd4f1e01bf3f42fc0d3dd5b2bc",
+                "url": "https://api.github.com/repos/kenjis/siriusphp-validation/zipball/cbea1a01536a06a67b9d1838fac11d3dece03bb3",
+                "reference": "cbea1a01536a06a67b9d1838fac11d3dece03bb3",
                 "shasum": ""
             },
             "require": {
@@ -78,7 +78,6 @@
                     "autoload.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -96,7 +95,10 @@
                 "security",
                 "validation"
             ],
-            "time": "2015-06-26 06:21:17"
+            "support": {
+                "source": "https://github.com/kenjis/siriusphp-validation/tree/add-getOption"
+            },
+            "time": "2015-07-02 04:15:23"
         }
     ],
     "packages-dev": [
@@ -616,7 +618,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "siriusphp/validation": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
