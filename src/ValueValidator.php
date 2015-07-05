@@ -10,6 +10,8 @@ use Sirius\Validation\Rule\Required;
 
 class ValueValidator extends \Sirius\Validation\ValueValidator
 {
+    private $isRequired;
+
     /**
      * Added by kenjis
      * 
@@ -97,17 +99,7 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
             return true;
         }
 
-        /* @var $rule \Sirius\Validation\Rule\AbstractValidator */
-        foreach ($this->rules as $rule) {
-            $rule->setContext($context);
-            $this->runValidation($rule, $value, $valueIdentifier);
-
-            // if field is required and we have an error,
-            // do not continue with the rest of rules
-            if ($isRequired && $this->hasError()) {
-                break;
-            }
-        }
+        $this->runValidations($value, $valueIdentifier, $context);
 
         return ! $this->hasError();
     }
@@ -119,27 +111,41 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
 
     protected function isRequired()
     {
-        $isRequired = false;
+        if ($this->isRequired !== null) {
+            return $this->isRequired;
+        }
+
+        $this->isRequired = false;
         foreach ($this->rules as $rule) {
             if ($rule instanceof Required) {
-                $isRequired = true;
+                $this->isRequired = true;
                 break;
             }
         }
-        return $isRequired;
+        return $this->isRequired;
     }
 
-    protected function runValidation($rule, $value, $valueIdentifier)
+    protected function runValidations($value, $valueIdentifier, $context)
     {
-        if (!$rule->validate($value, $valueIdentifier)) {
-            // if fatal rule fails
-            if ($rule->getOption('fatal')) {
-                $exception = new FatalValidationError($rule->getMessage());
-                $exception->setRule($rule, $value, $valueIdentifier);
-                throw $exception;
+        /* @var $rule \Sirius\Validation\Rule\AbstractValidator */
+        foreach ($this->rules as $rule) {
+            $rule->setContext($context);
+            if (!$rule->validate($value, $valueIdentifier)) {
+                // if fatal rule fails
+                if ($rule->getOption('fatal')) {
+                    $exception = new FatalValidationError($rule->getMessage());
+                    $exception->setRule($rule, $value, $valueIdentifier);
+                    throw $exception;
+                }
+
+                $this->addMessage($rule->getMessage());
             }
 
-            $this->addMessage($rule->getMessage());
+            // if field is required and we have an error,
+            // do not continue with the rest of rules
+            if ($this->isRequired() && $this->hasError()) {
+                break;
+            }
         }
     }
 }
