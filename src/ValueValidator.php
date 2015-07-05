@@ -93,9 +93,8 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
     public function validate($value, $valueIdentifier = null, WrapperInterface $context = null)
     {
         $this->messages = array();
-        $isRequired = $this->isRequired();
 
-        if (!$isRequired && $value === null) {
+        if (! $this->isRequired() && $value === null) {
             return true;
         }
 
@@ -130,22 +129,27 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         /* @var $rule \Sirius\Validation\Rule\AbstractValidator */
         foreach ($this->rules as $rule) {
             $rule->setContext($context);
-            if (!$rule->validate($value, $valueIdentifier)) {
-                // if fatal rule fails
-                if ($rule->getOption('fatal')) {
-                    $exception = new FatalValidationError($rule->getMessage());
-                    $exception->setRule($rule, $value, $valueIdentifier);
-                    throw $exception;
-                }
-
-                $this->addMessage($rule->getMessage());
-            }
+            $this->runValidation($rule, $value, $valueIdentifier);
 
             // if field is required and we have an error,
             // do not continue with the rest of rules
             if ($this->isRequired() && $this->hasError()) {
                 break;
             }
+        }
+    }
+
+    protected function runValidation($rule, $value, $valueIdentifier)
+    {
+        if (!$rule->validate($value, $valueIdentifier)) {
+            // if fatal rule fails
+            if ($rule->getOption('fatal')) {
+                $exception = new FatalValidationError($rule->getMessage());
+                $exception->setRule($rule, $value, $valueIdentifier);
+                throw $exception;
+            }
+
+            $this->addMessage($rule->getMessage());
         }
     }
 }
