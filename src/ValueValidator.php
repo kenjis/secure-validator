@@ -106,16 +106,8 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         /* @var $rule \Sirius\Validation\Rule\AbstractValidator */
         foreach ($this->rules as $rule) {
             $rule->setContext($context);
-            if (!$rule->validate($value, $valueIdentifier)) {
-                // if fatal rule fails
-                if ($rule->getOption('fatal')) {
-                    $exception = new FatalValidationError($rule->getMessage());
-                    $exception->setRule($rule, $value, $valueIdentifier);
-                    throw $exception;
-                }
-                
-                $this->addMessage($rule->getMessage());
-            }
+            $this->validateRule($rule, $value, $valueIdentifier);
+
             // if field is required and we have an error,
             // do not continue with the rest of rules
             if ($isRequired && count($this->messages)) {
@@ -124,5 +116,19 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         }
 
         return count($this->messages) === 0;
+    }
+
+    protected function validateRule($rule, $value, $valueIdentifier)
+    {
+        if (!$rule->validate($value, $valueIdentifier)) {
+            // if fatal rule fails
+            if ($rule->getOption('fatal')) {
+                $exception = new FatalValidationError($rule->getMessage());
+                $exception->setRule($rule, $value, $valueIdentifier);
+                throw $exception;
+            }
+
+            $this->addMessage($rule->getMessage());
+        }
     }
 }
