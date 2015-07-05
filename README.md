@@ -30,9 +30,17 @@ That is you have to set (overwrite) max length rule to all fields. You don't for
 
 If a field does not match the default rules, you can remove the rules.
 
+~~~php
+$validator->remove('field', 'ValidUtf8');
+~~~
+
 ### Fatal Rules
 
 You can set a validation rule as *fatal* to detect abnormal input like an attack.
+
+~~~php
+$validator->add('field', 'maxlength', ['max' => 60, 'fatal' => true]);
+~~~
 
 If a fatal rule fails, exception `FatalValidationError` will be thrown immediately.
 
