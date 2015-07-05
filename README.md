@@ -16,7 +16,7 @@ Secure Validator is a library for input validation. It is based on [Sirius Valid
 
 ### Default Rules
 
-Secure Validator promotes strict validation. It sets default validtion rules to all fields.
+Secure Validator promotes strict validation. It sets default validation rules to all fields.
 
  * `ValidUtf8` checks if value is valid UTF-8 character encoding
  * `IsString` checks if value is string
@@ -24,7 +24,7 @@ Secure Validator promotes strict validation. It sets default validtion rules to 
 
 And
 
- * adds `MaxLength` 1 letter.
+ * adds `MaxLength` 1 letter
 
 That is you have to set (overwrite) max length rule to all fields. You don't forget it.
 
