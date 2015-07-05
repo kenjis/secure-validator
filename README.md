@@ -92,10 +92,6 @@ Get input value after filtering of specific field.
 $field = $validator->getInputValue('field');
 ~~~
 
-### Changed Rules
-
-`Url`: values must be a valid URL address (http, https only)
-
 ### Tips
 
 When you set `required`, if a rule fails, Sirius Validation will not apply any more rules to that field.

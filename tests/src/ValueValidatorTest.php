@@ -33,7 +33,6 @@ class ValueValidatorTest extends \PHPUnit_Framework_TestCase
             'NoControl',
             'NoTabAndNewLine',
             'ValidUtf8',
-            'Url'   // overwrite
         );
         foreach ($rulesClasses as $class) {
             $fullClassName = '\\' . __NAMESPACE__ . '\Rule\\' . $class;
