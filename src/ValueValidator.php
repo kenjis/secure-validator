@@ -100,7 +100,7 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         /* @var $rule \Sirius\Validation\Rule\AbstractValidator */
         foreach ($this->rules as $rule) {
             $rule->setContext($context);
-            $this->validateRule($rule, $value, $valueIdentifier);
+            $this->runValidation($rule, $value, $valueIdentifier);
 
             // if field is required and we have an error,
             // do not continue with the rest of rules
@@ -124,7 +124,7 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         return $isRequired;
     }
 
-    protected function validateRule($rule, $value, $valueIdentifier)
+    protected function runValidation($rule, $value, $valueIdentifier)
     {
         if (!$rule->validate($value, $valueIdentifier)) {
             // if fatal rule fails
