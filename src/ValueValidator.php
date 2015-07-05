@@ -104,12 +104,17 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
 
             // if field is required and we have an error,
             // do not continue with the rest of rules
-            if ($isRequired && count($this->messages)) {
+            if ($isRequired && $this->hasError()) {
                 break;
             }
         }
 
-        return count($this->messages) === 0;
+        return ! $this->hasError();
+    }
+
+    protected function hasError()
+    {
+        return count($this->messages) !== 0;
     }
 
     protected function isRequired()
