@@ -91,13 +91,7 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
     public function validate($value, $valueIdentifier = null, WrapperInterface $context = null)
     {
         $this->messages = array();
-        $isRequired = false;
-        foreach ($this->rules as $rule) {
-            if ($rule instanceof Required) {
-                $isRequired = true;
-                break;
-            }
-        }
+        $isRequired = $this->isRequired();
 
         if (!$isRequired && $value === null) {
             return true;
@@ -116,6 +110,18 @@ class ValueValidator extends \Sirius\Validation\ValueValidator
         }
 
         return count($this->messages) === 0;
+    }
+
+    protected function isRequired()
+    {
+        $isRequired = false;
+        foreach ($this->rules as $rule) {
+            if ($rule instanceof Required) {
+                $isRequired = true;
+                break;
+            }
+        }
+        return $isRequired;
     }
 
     protected function validateRule($rule, $value, $valueIdentifier)
