@@ -8,10 +8,17 @@ class Validator
 {
     private $validator;
     private $filter;
-    
+    private $defaultRules = [
+        ['IsString'],
+        ['ValidUtf8'],
+        ['NoControl'],
+        ['MaxLength', ['max' => 1]],
+    ];
+
     public function __construct()
     {
         $this->validator = new ValidatorEx();
+        $this->validator->setDefaultRules($this->defaultRules);
         $this->filter    = new Filtrator();
     }
 

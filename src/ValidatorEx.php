@@ -7,6 +7,7 @@ use Sirius\Validation\RuleFactory;
 class ValidatorEx extends \Sirius\Validation\Validator
 {
     protected $validatedData = [];
+    protected $defaultRules = [];
 
     public function __construct(RuleFactory $ruleFactory = null, ErrorMessage $errorMessagePrototype = null)
     {
@@ -27,6 +28,12 @@ class ValidatorEx extends \Sirius\Validation\Validator
             $labeledErrorMessage = constant($fullClassName . '::LABELED_MESSAGE');
             $this->ruleFactory->register($name, $fullClassName, $errorMessage, $labeledErrorMessage);
         }
+    }
+
+    public function setDefaultRules(array $rules)
+    {
+        $this->defaultRules = $rules;
+        return $this;
     }
 
     /**
@@ -128,7 +135,9 @@ class ValidatorEx extends \Sirius\Validation\Validator
     protected function ensureSelectorRulesExist($selector, $label = NULL)
     {
         if (!isset($this->rules[$selector])) {
-            $this->rules[$selector] = new ValueValidator($this->getRuleFactory(), $this->getErroMessagePrototype(), $label);
+            $valueValidator = new ValueValidator($this->getRuleFactory(), $this->getErroMessagePrototype(), $label);
+            $valueValidator->addDefaultRules($this->defaultRules);
+            $this->rules[$selector] = $valueValidator;
         }
     }
 

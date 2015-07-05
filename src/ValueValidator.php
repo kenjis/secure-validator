@@ -10,20 +10,17 @@ use Sirius\Validation\Rule\Required;
 
 class ValueValidator extends \Sirius\Validation\ValueValidator
 {
-    public function __construct(RuleFactory $ruleFactory, ErrorMessage $errorMessagePrototype, $label = null)
+    /**
+     * Added by kenjis
+     * 
+     * @param array $rules [0 => [ruleNameString, optionArray], ...]
+     */
+    public function addDefaultRules(array $rules)
     {
-        $this->ruleFactory = $ruleFactory;
-        $this->errorMessagePrototype = $errorMessagePrototype;
-        if ($label) {
-            $this->label = $label;
+        foreach ($rules as $rule) {
+            isset($rule[1]) ?: $rule[1] = null;
+            $this->add($rule[0], $rule[1]);
         }
-        $this->rules = new RuleCollection;
-        
-        // add default rules [Added by kenjis]
-        $this->add('IsString');
-        $this->add('ValidUtf8');
-        $this->add('NoControl');
-        $this->add('maxlength', ['max' => 1]);
     }
 
     /**

@@ -12,6 +12,15 @@ class ValueValidatorTest extends \PHPUnit_Framework_TestCase
         $this->prepareObjects();
         
         $this->obj = new ValueValidator($this->ruleFactory, $this->errorMessagePrototype);
+        $this->obj->addDefaultRules(
+            [
+                ['IsString'],
+                ['ValidUtf8'],
+                ['NoControl'],
+                ['MaxLength', ['max' => 1]],
+            ]
+        );
+        
     }
 
     protected function prepareObjects()
@@ -46,6 +55,14 @@ class ValueValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $label = 'Label';
         $this->obj = new ValueValidator($this->ruleFactory, $this->errorMessagePrototype, $label);
+        $this->obj->addDefaultRules(
+            [
+                ['IsString'],
+                ['ValidUtf8'],
+                ['NoControl'],
+                ['MaxLength', ['max' => 1]],
+            ]
+        );
 
         $this->obj->validate('value');
         $this->assertEquals(
