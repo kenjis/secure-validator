@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c92c9e42f626e1fd3a3978ee99b1abdd",
+    "hash": "3ab60c21dc16e455275c460a280dfc24",
     "packages": [
         {
             "name": "siriusphp/filtration",
@@ -53,16 +53,16 @@
         },
         {
             "name": "siriusphp/validation",
-            "version": "dev-add-getOption",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kenjis/siriusphp-validation.git",
-                "reference": "cbea1a01536a06a67b9d1838fac11d3dece03bb3"
+                "url": "https://github.com/siriusphp/validation.git",
+                "reference": "be0a46c7fdf18d2192d313bf9534482a6ec2b502"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/siriusphp-validation/zipball/cbea1a01536a06a67b9d1838fac11d3dece03bb3",
-                "reference": "cbea1a01536a06a67b9d1838fac11d3dece03bb3",
+                "url": "https://api.github.com/repos/siriusphp/validation/zipball/be0a46c7fdf18d2192d313bf9534482a6ec2b502",
+                "reference": "be0a46c7fdf18d2192d313bf9534482a6ec2b502",
                 "shasum": ""
             },
             "require": {
@@ -78,6 +78,7 @@
                     "autoload.php"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -95,10 +96,7 @@
                 "security",
                 "validation"
             ],
-            "support": {
-                "source": "https://github.com/kenjis/siriusphp-validation/tree/add-getOption"
-            },
-            "time": "2015-07-02 04:15:23"
+            "time": "2015-07-08 06:05:10"
         }
     ],
     "packages-dev": [
