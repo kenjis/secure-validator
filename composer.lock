@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b76cf19d0e39f476b8365e928fd93ed",
+    "hash": "3ab60c21dc16e455275c460a280dfc24",
     "packages": [
         {
             "name": "siriusphp/filtration",
@@ -53,15 +53,15 @@
         },
         {
             "name": "siriusphp/validation",
-            "version": "2.1.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kenjis/siriusphp-validation.git",
+                "url": "https://github.com/siriusphp/validation.git",
                 "reference": "be0a46c7fdf18d2192d313bf9534482a6ec2b502"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/siriusphp-validation/zipball/be0a46c7fdf18d2192d313bf9534482a6ec2b502",
+                "url": "https://api.github.com/repos/siriusphp/validation/zipball/be0a46c7fdf18d2192d313bf9534482a6ec2b502",
                 "reference": "be0a46c7fdf18d2192d313bf9534482a6ec2b502",
                 "shasum": ""
             },
@@ -78,6 +78,7 @@
                     "autoload.php"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -95,9 +96,6 @@
                 "security",
                 "validation"
             ],
-            "support": {
-                "source": "https://github.com/kenjis/siriusphp-validation/tree/master"
-            },
             "time": "2015-07-08 06:05:10"
         }
     ],
@@ -618,7 +616,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "siriusphp/validation": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
