@@ -62,6 +62,8 @@ if ($validator->validate($_POST)) {
 }
 ~~~
 
+See [Built-in validation rules](http://www.sirius.ro/php/sirius/validation/validation_rules.html).
+
 ### Added Method
 
 #### `Validator::filter()`
